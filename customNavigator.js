@@ -5,24 +5,39 @@ import InnerApp from "./InnerApp";
 import React from "react";
 import "react-native-gesture-handler";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-// import store from "./store";
-
+const Tab = createBottomTabNavigator();
 const height = Dimensions.get("window").height;
 
-const store = createStore(myReducer);
-
-export default function App() {
+export default function customNavigationBar({ navigation }) {
   return (
-    <Provider store={store}>
-      <InnerApp></InnerApp>
-    </Provider>
+    <View style={styles.container}>
+      <Text
+        style={styles.homeTitle}
+        onPress={() => {
+          console.log("HomeTitle");
+          navigation.navigate("Home");
+        }}
+      >
+        HOME
+      </Text>
+      <Text
+        style={styles.mapTitle}
+        onPress={() => {
+          console.log("MapTitle");
+          navigation.navigate("Map");
+        }}
+      >
+        MAP
+      </Text>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.1,
+    flex: 0.15,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",

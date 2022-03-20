@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import store from "../store";
+import customNavigationBar from "../customNavigator";
+import positionData from "../positionData";
+import { selectLocation } from "../actions";
+
 const { width, height } = Dimensions.get("screen");
 
 const MapScreen = ({ navigation }) => {
-  // const selectedLocation = useSelector((state) => state.selectedLocation.value);
-
   const [errorMsg, setErrorMsg] = useState(null);
 
   const startRegion = {
@@ -16,19 +18,36 @@ const MapScreen = ({ navigation }) => {
     latitudeDelta: 0.0421,
   };
 
+  const updateState = (input) => {
+    store.dispatch(selectLocation(input));
+  };
+
   return (
-    <MapView
-      style={styles.map}
-      loadingEnabled={true}
-      initialRegion={startRegion}
-    >
-      {store.getState().longitude !== startRegion.longitude ||
-      store.getState().latitude === startRegion.latitude ? (
-        <Marker coordinate={store.getState()}></Marker>
-      ) : (
-        <Marker coordinate={startRegion}></Marker>
-      )}
-    </MapView>
+    <>
+      <MapView
+        style={styles.map}
+        loadingEnabled={true}
+        initialRegion={
+          store.getState().longitude !== startRegion.longitude ||
+          store.getState().latitude === startRegion.latitude
+            ? store.getState()
+            : startRegion
+        }
+      >
+        {positionData.map((element) => {
+          return (
+            <Marker
+              coordinate={element}
+              onPress={() => {
+                updateState(element);
+                navigation.navigate("Details");
+              }}
+            ></Marker>
+          );
+        })}
+      </MapView>
+      {customNavigationBar({ navigation })}
+    </>
   );
 };
 
@@ -37,12 +56,19 @@ export default MapScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    margin: 5,
+    paddingLeft: 10,
+    zIndex: 3, // works on ios
+    elevation: 3, // works on android
   },
   map: {
-    width,
     height,
+  },
+  head: { height: 40, backgroundColor: "#f1f8ff" },
+  text: { margin: 6 },
+  text: {
+    flex: 1,
   },
 });
