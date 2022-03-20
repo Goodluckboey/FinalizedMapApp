@@ -1,9 +1,13 @@
-import React from "react";
-import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  ScrollView,
+  Button,
+} from "react-native";
 import store from "../store";
-import { Provider } from "react-redux";
-import { useSelector } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -11,11 +15,13 @@ const DataScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {store.getState()[store.getState().length - 1].metaData ? (
-          <Text>{store.getState()[store.getState().length - 1].metaData}</Text>
-        ) : (
-          <Text>No Data Selected</Text>
-        )}
+        <Text>{store.getState().metaData}</Text>
+        <Button
+          title="Press me"
+          onPress={() => {
+            console.log(store.getState());
+          }}
+        ></Button>
       </View>
     </ScrollView>
   );

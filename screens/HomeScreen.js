@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,6 +15,19 @@ import { Provider } from "react-redux";
 const height = Dimensions.get("window").height;
 
 const HomeScreen = ({ navigation }) => {
+  const [rerender, setrerender] = useState(0);
+  let counter = 0;
+
+  const makeRender = () => {
+    counter++;
+    console.log(1);
+  };
+
+  useEffect(() => {
+    setrerender(counter);
+    console.log(2);
+  }, [counter]);
+
   const produceTest = () => {
     alert("Hello! I am an alert box!!");
     console.log(store.getState());
@@ -27,18 +40,20 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
+      {/* <View style={styles.container}> */}
+      {/* <Button onPress={makeRender} title="press"></Button>
         <Button title="Fetch Data!" onPress={produceTest}></Button>
-        <Text>Home Screen</Text>
-        {positionData.map((element) => {
-          return (
-            <Text key={element.name}>
+        <Text>Home Screen</Text> */}
+      {positionData.map((element) => {
+        return (
+          <View key={element.name}>
+            <Text>
               {element.name}
               <Button
                 title="View Details"
                 onPress={() => {
                   updateState(element);
-                  navigation.navigate("Data");
+                  navigation.navigate("Details");
                 }}
               ></Button>
               <Button
@@ -49,9 +64,10 @@ const HomeScreen = ({ navigation }) => {
                 }}
               ></Button>
             </Text>
-          );
-        })}
-      </View>
+          </View>
+        );
+      })}
+      {/* </View> */}
     </ScrollView>
   );
 };

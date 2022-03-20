@@ -8,21 +8,13 @@ import selectLocationReducer from "../features/selectedLocation";
 
 const Tab = createBottomTabNavigator();
 
-const store = configureStore({
-  reducer: {
-    selectedLocation: selectLocationReducer,
-  },
-});
-
 const Tabs = () => {
   return (
-    <Provider store={store}>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Map" component={MapScreen} />
-        <Tab.Screen name="Data" component={DataScreen} />
-      </Tab.Navigator>
-    </Provider>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen name="Data" component={DataScreen} />
+    </Tab.Navigator>
   );
 };
 

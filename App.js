@@ -1,31 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-import MapView from "react-native-maps";
-import { NavigationContainer } from "@react-navigation/native";
-import Tabs from "./navigation/tabs";
-import { Provider } from "react-redux";
-import store from "./store";
+import { Provider, useSelector } from "react-redux";
+import { createStore } from "redux";
+import myReducer from "./reducer";
+import InnerApp from "./InnerApp";
+import React, { useEffect, useState } from "react";
+import "react-native-gesture-handler";
 
-const height = Dimensions.get("window").height;
+// import store from "./store";
+
+const store = createStore(myReducer);
+
 
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Tabs />
-      </NavigationContainer>
+      <InnerApp></InnerApp>
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  map: {
-    height,
-  },
-});
