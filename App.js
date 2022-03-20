@@ -13,6 +13,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Tabs />
+        <Text>Hello Test</Text>
       </NavigationContainer>
     </Provider>
   );
