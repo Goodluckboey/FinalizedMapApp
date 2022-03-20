@@ -45,7 +45,6 @@ const HomeScreen = ({ navigation }) => {
             </View>
           );
         })}
-        {/* </View> */}
       </ScrollView>
       {customNavigationBar({ navigation })}
     </>
