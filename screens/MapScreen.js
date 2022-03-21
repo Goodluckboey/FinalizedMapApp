@@ -37,6 +37,7 @@ const MapScreen = ({ navigation }) => {
         {positionData.map((element) => {
           return (
             <Marker
+              key={element.name}
               coordinate={element}
               onPress={() => {
                 updateState(element);

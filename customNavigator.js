@@ -1,11 +1,12 @@
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import {myReducer} from "./reducer";
+import { myReducer } from "./reducer";
 import InnerApp from "./InnerApp";
 import React from "react";
 import "react-native-gesture-handler";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 const height = Dimensions.get("window").height;
@@ -20,7 +21,8 @@ export default function customNavigationBar({ navigation }) {
           navigation.navigate("Home");
         }}
       >
-        HOME
+        <MaterialCommunityIcons name="home" size={24} color="black" />
+        Home
       </Text>
       <Text
         style={styles.mapTitle}
@@ -29,7 +31,8 @@ export default function customNavigationBar({ navigation }) {
           navigation.navigate("Map");
         }}
       >
-        MAP
+        <MaterialCommunityIcons name="map-marker" size={24} color="black" />
+        Map
       </Text>
     </View>
   );
@@ -37,7 +40,8 @@ export default function customNavigationBar({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.2,
+    minHeight: 100,
+    flex: 0,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",

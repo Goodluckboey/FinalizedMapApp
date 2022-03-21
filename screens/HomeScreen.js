@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,16 +7,21 @@ import {
   Button,
   ScrollView,
 } from "react-native";
-import positionData from "../positionData";
 import store from "../store";
 import { selectLocation, makeNewLocationList } from "../actions";
 import customNavigationBar from "../customNavigator";
+import { AntDesign } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 
 const height = Dimensions.get("window").height;
 
 const HomeScreen = ({ navigation }) => {
-  // console.log(store.getState());
-  // console.log("this is store^");
+  const isFocused = useIsFocused();
+  const [force, setForce] = useState(false);
+
+  useEffect(() => {
+    setForce(!force);
+  }, [isFocused]);
 
   const updateState = (input) => {
     store.dispatch(selectLocation(input));
@@ -25,18 +30,29 @@ const HomeScreen = ({ navigation }) => {
   return (
     <>
       <ScrollView style={styles.scroll}>
-        <Button
-          title="True Form"
-          onPress={() => {
-            console.log(store.getState());
-          }}
-        ></Button>
         {store.getState().starReducer.map((element) => {
           return (
-            <View key={element.name} style={styles.container}>
-              <Text style={styles.text}>
-                {element.name}
+            <View key={element.name}>
+              {element.starred ? (
+                <AntDesign
+                  style={styles.star}
+                  name="star"
+                  size={24}
+                  color="black"
+                />
+              ) : (
+                <AntDesign
+                  style={styles.star}
+                  name="staro"
+                  size={24}
+                  color="black"
+                />
+              )}
+              <Text style={styles.text}> {element.name}</Text>
+
+              <View>
                 <Button
+                  style={styles.button}
                   title="View Details"
                   onPress={() => {
                     updateState(element);
@@ -44,18 +60,19 @@ const HomeScreen = ({ navigation }) => {
                   }}
                 ></Button>
                 <Button
+                  style={styles.button}
                   title="View on Map"
                   onPress={() => {
                     updateState(element);
                     navigation.navigate("Map");
                   }}
                 ></Button>
-              </Text>
+              </View>
             </View>
           );
         })}
+        {customNavigationBar({ navigation })}
       </ScrollView>
-      {customNavigationBar({ navigation })}
     </>
   );
 };
@@ -63,19 +80,23 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  scroll: {},
+  button: { margin: 80 },
+  scroll: { height },
   container: {
+    maxHeight: "50%",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 3, // works on ios
-    elevation: 3, // works on android
   },
   map: {
     height,
   },
   text: { margin: 6 },
   text: {
-    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
+  star: { marginLeft: "auto", marginRight: "auto" },
 });

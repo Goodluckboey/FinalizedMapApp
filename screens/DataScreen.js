@@ -1,50 +1,56 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  ScrollView,
-  Button,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { AntDesign } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import store from "../store";
 import customNavigationBar from "../customNavigator";
 import { makeNewLocationList } from "../actions";
-// import { starReducer, myReducer } from "../reducer";
+import { starReducer, myReducer } from "../reducer";
 
 const { width, height } = Dimensions.get("screen");
 
 const DataScreen = ({ navigation }) => {
+  const [force, setForce] = useState(false);
+  const [render, setRender] = useState(false);
   const updateState = (input) => {
     store.dispatch(makeNewLocationList(input));
   };
 
+  useEffect(() => {
+    setRender(!render);
+  }, [force]);
+
   return (
     <>
-      <ScrollView>
-        <View style={styles.container}>
-          <Text>{store.getState().myReducer.metaData}</Text>
-          <Button
-            title="Star Me"
-            onPress={() => {
-              console.log(store.getState());
-              // updateState({})
-            }}
-          ></Button>
-          <Button
-            title="TestME"
+      <View style={styles.container}>
+        <Text style={{marginBottom: "20%"}}>{store.getState().myReducer.metaData}</Text>
+
+        {store.getState().myReducer.starred ? (
+          <AntDesign
             onPress={() => {
               updateState(store.getState().myReducer);
+              setForce(!force);
+              console.log("Favorited!");
+              navigation.navigate("Home");
             }}
-          ></Button>
-        </View>
-      </ScrollView>
-      <Button
-        title="console"
-        onPress={() => {
-          console.log(store.getState().starReducer);
-        }}
-      ></Button>
+            name="star"
+            size={24}
+            color="black"
+          />
+        ) : (
+          <AntDesign
+            onPress={() => {
+              updateState(store.getState().myReducer);
+              setForce(!force);
+              console.log("Favorited!");
+              navigation.navigate("Home");
+            }}
+            name="staro"
+            size={24}
+            color="black"
+          />
+        )}
+        <Text>Favorite this Location</Text>
+      </View>
       {customNavigationBar({ navigation })}
     </>
   );
