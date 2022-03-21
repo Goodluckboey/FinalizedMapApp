@@ -9,7 +9,6 @@
 
 
 ### Built With
-#### MERN STACK
 * [React Native](https://www.npmjs.com/package/react-native)
 * [React-Redux](https://www.npmjs.com/package/react-redux)
 * [React-Navigation](https://www.npmjs.com/package/react-navigation)
