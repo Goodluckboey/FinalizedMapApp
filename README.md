@@ -20,6 +20,7 @@
 * Clicking on "View Details" will bring you to the Details screen, which has test data
 * Clicking on "View on Map" will bring you to the Map screen, with markers indicating list locations
 * * Tapping on a marker will bring user to Details screen
-* <NOT YET IMPLEMENTED> Clicking on the Star icon within the Details screen will add a star next to the listed element in HomeScreen
+* Clicking on the Star icon within the Details screen will fill the star next to the listed element in HomeScreen.
+* * Tapping it again will unfavorite it.
 
 
