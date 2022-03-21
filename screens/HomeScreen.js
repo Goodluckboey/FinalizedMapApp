@@ -9,19 +9,22 @@ import {
 } from "react-native";
 import positionData from "../positionData";
 import store from "../store";
-import { selectLocation } from "../actions";
+import { selectLocation, makeNewLocationList } from "../actions";
 import customNavigationBar from "../customNavigator";
 
 const height = Dimensions.get("window").height;
 
 const HomeScreen = ({ navigation }) => {
+  // console.log(store.getState());
+  // console.log("this is store^");
+
   const updateState = (input) => {
     store.dispatch(selectLocation(input));
   };
 
   return (
     <>
-      <ScrollView>
+      <ScrollView style={styles.scroll}>
         {positionData.map((element) => {
           return (
             <View key={element.name} style={styles.container}>
@@ -54,15 +57,17 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+  scroll: {},
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    zIndex: 3, // works on ios
+    elevation: 3, // works on android
   },
   map: {
     height,
   },
-  head: { height: 40, backgroundColor: "#f1f8ff" },
   text: { margin: 6 },
   text: {
     flex: 1,

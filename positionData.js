@@ -6,6 +6,7 @@ const positionData = [
     metaData: "A simple Testing Ground for locational Data 1",
     longitudeDelta: 0.0922,
     latitudeDelta: 0.0421,
+    starred: false,
   },
   {
     name: "Test 2",
@@ -14,6 +15,7 @@ const positionData = [
     metaData: "A simple Testing Ground for locational Data 2",
     longitudeDelta: 0.0922,
     latitudeDelta: 0.0421,
+    starred: false,
   },
   {
     name: "Test 3",
@@ -22,6 +24,7 @@ const positionData = [
     metaData: "A simple Testing Ground for locational Data 3",
     longitudeDelta: 0.0922,
     latitudeDelta: 0.0421,
+    starred: false,
   },
   {
     name: "Test 4",
@@ -30,6 +33,25 @@ const positionData = [
     metaData: "A simple Testing Ground for locational Data 4",
     longitudeDelta: 0.0922,
     latitudeDelta: 0.0421,
+    starred: false,
+  },
+  {
+    name: "Test 5",
+    longitude: 103.831959,
+    latitude: 1.4427,
+    metaData: "A simple Testing Ground for locational Data 5",
+    longitudeDelta: 0.0922,
+    latitudeDelta: 0.0421,
+    starred: false,
+  },
+  {
+    name: "Test 6",
+    longitude: 103.791959,
+    latitude: 1.3527,
+    metaData: "A simple Testing Ground for locational Data 6",
+    longitudeDelta: 0.0922,
+    latitudeDelta: 0.0421,
+    starred: false,
   },
 ];
 

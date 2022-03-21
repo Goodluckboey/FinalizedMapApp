@@ -9,10 +9,15 @@ import {
 } from "react-native";
 import store from "../store";
 import customNavigationBar from "../customNavigator";
+import { makeNewLocationList } from "../actions";
 
 const { width, height } = Dimensions.get("screen");
 
 const DataScreen = ({ navigation }) => {
+  const updateState = (input) => {
+    store.dispatch(makeNewLocationList(input));
+  };
+
   return (
     <>
       <ScrollView>
@@ -22,6 +27,21 @@ const DataScreen = ({ navigation }) => {
             title="Star Me"
             onPress={() => {
               console.log(store.getState());
+              // updateState({})
+            }}
+          ></Button>
+          <Button
+            title="TestME"
+            onPress={() => {
+              updateState({
+                latitude: 1.4027,
+                latitudeDelta: 0.0421,
+                longitude: 103.861959,
+                longitudeDelta: 0.0922,
+                metaData: "Make sure TestingGround",
+                name: "Test A",
+                starred: true,
+              });
             }}
           ></Button>
         </View>

@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import myReducer from "./reducer";
+import {myReducer} from "./reducer";
 import InnerApp from "./InnerApp";
 import React from "react";
 import "react-native-gesture-handler";
@@ -37,12 +37,11 @@ export default function customNavigationBar({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.15,
+    flex: 0.2,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    margin: 10,
   },
   map: {
     height,
