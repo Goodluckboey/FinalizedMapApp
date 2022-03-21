@@ -10,6 +10,7 @@ import {
 import store from "../store";
 import customNavigationBar from "../customNavigator";
 import { makeNewLocationList } from "../actions";
+// import { starReducer, myReducer } from "../reducer";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -22,7 +23,7 @@ const DataScreen = ({ navigation }) => {
     <>
       <ScrollView>
         <View style={styles.container}>
-          <Text>{store.getState().metaData}</Text>
+          <Text>{store.getState().myReducer.metaData}</Text>
           <Button
             title="Star Me"
             onPress={() => {

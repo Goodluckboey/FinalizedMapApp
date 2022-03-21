@@ -28,9 +28,9 @@ const MapScreen = ({ navigation }) => {
         style={styles.map}
         loadingEnabled={true}
         initialRegion={
-          store.getState().longitude !== startRegion.longitude ||
-          store.getState().latitude === startRegion.latitude
-            ? store.getState()
+          store.getState().myReducer.longitude !== startRegion.longitude ||
+          store.getState().myReducer.latitude === startRegion.latitude
+            ? store.getState().myReducer
             : startRegion
         }
       >
