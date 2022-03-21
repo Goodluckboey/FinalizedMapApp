@@ -34,19 +34,17 @@ const DataScreen = ({ navigation }) => {
           <Button
             title="TestME"
             onPress={() => {
-              updateState({
-                latitude: 1.4027,
-                latitudeDelta: 0.0421,
-                longitude: 103.861959,
-                longitudeDelta: 0.0922,
-                metaData: "Make sure TestingGround",
-                name: "Test A",
-                starred: true,
-              });
+              updateState(store.getState().myReducer);
             }}
           ></Button>
         </View>
       </ScrollView>
+      <Button
+        title="console"
+        onPress={() => {
+          console.log(store.getState().starReducer);
+        }}
+      ></Button>
       {customNavigationBar({ navigation })}
     </>
   );

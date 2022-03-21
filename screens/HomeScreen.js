@@ -25,7 +25,13 @@ const HomeScreen = ({ navigation }) => {
   return (
     <>
       <ScrollView style={styles.scroll}>
-        {positionData.map((element) => {
+        <Button
+          title="True Form"
+          onPress={() => {
+            console.log(store.getState());
+          }}
+        ></Button>
+        {store.getState().starReducer.map((element) => {
           return (
             <View key={element.name} style={styles.container}>
               <Text style={styles.text}>

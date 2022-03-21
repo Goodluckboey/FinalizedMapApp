@@ -1,4 +1,5 @@
 import * as actions from "./actionTypes";
+import positionData from "./positionData";
 
 export function myReducer(
   state = {
@@ -29,19 +30,17 @@ export function myReducer(
   }
 }
 
-export function starReducer(state = [], action) {
+export function starReducer(state = positionData, action) {
   switch (action.type) {
     case actions.ADD_STARRED_LIST:
-      return [
-        ...state,
-        {
-          name: action.payload.name,
-          longitude: action.payload.longitude,
-          latitude: action.payload.latitude,
-          metaData: action.payload.metaData,
-          starred: action.payload.starred,
-        },
-      ];
+      let stringifiedData = JSON.stringify(state);
+      let copyOfPositionData = JSON.parse(stringifiedData);
+      let starToBeToggled = copyOfPositionData.filter(
+        (element) => element.name === action.payload.name
+      );
+      starToBeToggled[0].starred = !action.payload.starred;
+      console.log("COPYCOPYCOPY: ", copyOfPositionData);
+      return copyOfPositionData;
 
     default:
       console.log("nothing Changed");
